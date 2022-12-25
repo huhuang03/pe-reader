@@ -8,6 +8,11 @@ reader_util::Content::Content(int size): _size(size) {
     _content = static_cast<unsigned char *>(malloc(size));
 }
 
+void reader_util::Content::read(std::istream &in) {
+  // how can I read?
+  in.read(reinterpret_cast<char *>(this->_content), this->_size);
+}
+
 int reader_util::Content::size() {
     return this->_size;
 }

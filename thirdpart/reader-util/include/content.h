@@ -19,7 +19,7 @@ class Content {
   Content(int size);
   ~Content();
   int size();
-  virtual void read(std::istream in);
+  virtual void read(std::istream &in);
 
   /**
    * set _content as content, size is Content's size.

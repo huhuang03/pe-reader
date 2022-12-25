@@ -6,4 +6,5 @@
 #define PE_READER_READER_UTIL_H
 #include "./content.h"
 #include "./section.h"
+#include "./common_util.h"
 #endif //PE_READER_READER_UTIL_H

@@ -19,8 +19,9 @@ class Section : public Content {
 
  public:
   Section(int size);
-  Section(int size, const std::vector<Content>& fields);
-  void read(std::istream in);
+  Section(int size, std::vector<Content>  fields);
+  void setFields(std::vector<Content>);
+  void read(std::istream &in) override;
 };
 }
 
