@@ -18,6 +18,6 @@ void printAsHex(const char* src, int len);
 /**
  * char array to int little ending
  */
-int charArray2Int(const char* charArray, int len);
+int charArray2Int(const void* charArray, int len);
 }
 #endif //PE_READER_THIRDPART_READER_UTIL_INCLUDE_COMMON_UTIL_H_

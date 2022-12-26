@@ -7,9 +7,10 @@
 #include "../include/common_util.h"
 
 void reader_util::printAsHex(const char *src, int len) {
+  const auto* p = reinterpret_cast<const unsigned char *>(src);
   std::cout << "0x";
   for (int i = 0; i < len; i++) {
-    printf("%02x", *(src + i));
+    printf("%02x", *(p + i));
     if (i != len -1) {
       std::cout << " ";
     }
@@ -24,7 +25,7 @@ void reader_util::printCharArray(const char *src, int len) {
     std::cout << std::endl;
 }
 
-int reader_util::charArray2Int(const char *charArray, int len) {
+int reader_util::charArray2Int(const void *charArray, int len) {
     const auto* valueArray = (const unsigned char *) charArray;
     int rst = 0;
     for (int i = len - 1; i >= 0; i--) {

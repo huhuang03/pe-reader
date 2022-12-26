@@ -43,32 +43,13 @@ int main(int argc, char **argv) {
     std::cout << "file not exist: " << argv[1] << std::endl;
     return 1;
   }
-  // read it.
+
   std::ifstream f;
   f.open(argv[1]);
-  // ok, we got f
   pe_reader::_IMAGE_DOS_HEADER docHeader{};
-  // why open fialed??
   f.read(reinterpret_cast<char *>(&docHeader), sizeof(docHeader));
-  reader_util::printCharArray(reinterpret_cast<const char *>(&docHeader.e_magic), sizeof(docHeader.e_magic));
-//  reader_util::printAsHex(reinterpret_cast<const char *>(&docHeader.e_magic), 10);
-//    reader_util::printCharArray(peMagic, 4);
-
-  // read ms-dos
-//    char magic[2];
-//    f.read(magic, 2);
-//    // magic is MZ
-//
-//    f.seekg(0x3c, std::ios_base::beg);
-//    char pPeMagic[4];
-//    f.read(pPeMagic, 4);
-//    reader_util::printCharArray(pPeMagic, 4);
-//
-//    int offsetPe = reader_util::charArray2Int(pPeMagic, 4);
-//
-//    f.seekg(offsetPe, std::ios_base::beg);
-//    char peMagic[4];
-//    f.read(peMagic, 4);
-//    reader_util::printCharArray(peMagic, 4);
+  int newHeader = reader_util::charArray2Int(&docHeader.e_lfanew, sizeof docHeader.e_lfanew);
+  std::cout << "newHeader: " << newHeader << std::endl;
+  reader_util::printAsHex(reinterpret_cast<const char *>(&docHeader.e_lfanew), sizeof(docHeader.e_lfanew));
   return 0;
 }
