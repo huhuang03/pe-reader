@@ -51,11 +51,12 @@ int main(int argc, char **argv) {
   int newHeader = reader_util::charArray2Int(&dosHeader.e_lfanew, sizeof dosHeader.e_lfanew);
 
   int dosInstructionContentLen = newHeader - sizeof dosHeader;
-  char dosInstructionContent[dosInstructionContentLen];
-  f.read(reinterpret_cast<char *>(dosInstructionContent), dosInstructionContentLen);
+  char *dosInstructionContent = static_cast<char *>(malloc(dosInstructionContentLen));
+  f.read(dosInstructionContent, dosInstructionContentLen);
 
   std::cout << "dosInstruction as hex: " << std::endl;
   reader_util::printAsHex(dosInstructionContent, dosInstructionContentLen);
 
+  free(dosInstructionContent);
   return 0;
 }

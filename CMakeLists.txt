@@ -8,5 +8,4 @@ add_subdirectory(thirdpart/x86-disassembler)
 
 file(GLOB pe_reader_SRC src/*.cc)
 add_executable(pe-reader ${pe_reader_SRC})
-target_include_directories(pe-reader PRIVATE thirdpart/reader-util)
 target_link_libraries(pe-reader reader-util x86-disassembler)

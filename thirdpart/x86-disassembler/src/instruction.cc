@@ -19,12 +19,13 @@ bool x86_disassembler::Instruction::check(std::istream *in) {
     return true;
   }
 
-  char tmp[this->_opCodeLen];
+  char* tmp = static_cast<char *>(malloc(this->_opCodeLen));
   for (int i = 0; i < this->_opCodeLen; i++) {
     tmp[i] = in->peek();
   }
-
-  return tmp == this->_opCode;
+  bool rst = tmp == this->_opCode;
+  free(tmp);
+  return rst;
 }
 
 void x86_disassembler::Instruction::read(std::istream *in) {
