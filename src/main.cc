@@ -46,10 +46,16 @@ int main(int argc, char **argv) {
 
   std::ifstream f;
   f.open(argv[1]);
-  pe_reader::_IMAGE_DOS_HEADER docHeader{};
-  f.read(reinterpret_cast<char *>(&docHeader), sizeof(docHeader));
-  int newHeader = reader_util::charArray2Int(&docHeader.e_lfanew, sizeof docHeader.e_lfanew);
-  std::cout << "newHeader: " << newHeader << std::endl;
-  reader_util::printAsHex(reinterpret_cast<const char *>(&docHeader.e_lfanew), sizeof(docHeader.e_lfanew));
+  pe_reader::_IMAGE_DOS_HEADER dosHeader{};
+  f.read(reinterpret_cast<char *>(&dosHeader), sizeof(dosHeader));
+  int newHeader = reader_util::charArray2Int(&dosHeader.e_lfanew, sizeof dosHeader.e_lfanew);
+
+  int dosInstructionContentLen = newHeader - sizeof dosHeader;
+  char dosInstructionContent[dosInstructionContentLen];
+  f.read(reinterpret_cast<char *>(dosInstructionContent), dosInstructionContentLen);
+
+  std::cout << "dosInstruction as hex: " << std::endl;
+  reader_util::printAsHex(dosInstructionContent, dosInstructionContentLen);
+
   return 0;
 }
